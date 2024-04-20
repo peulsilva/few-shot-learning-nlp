@@ -1,0 +1,4 @@
+/dist
+/build
+__pycache__*
+/few_shot_learning_nlp.egg-info

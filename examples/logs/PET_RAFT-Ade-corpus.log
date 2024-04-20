@@ -1,0 +1,82 @@
+INFO:torch.distributed.nn.jit.instantiator:Created a temporary directory at /tmp/tmpi6_lz_9e
+INFO:torch.distributed.nn.jit.instantiator:Writing /tmp/tmpi6_lz_9e/_remote_module_non_scriptable.py
+INFO:root:-------------------------
+INFO:root:End of epoch 0: f1 = 0.46153849363327026
+INFO:root:tensor([[ 0, 14],
+        [ 0,  6]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 1: f1 = 0.0
+INFO:root:tensor([[14,  0],
+        [ 6,  0]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 2: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 3: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 4: f1 = 0.5714285373687744
+INFO:root:tensor([[10,  4],
+        [ 2,  4]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 5: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 6: f1 = 0.444444477558136
+INFO:root:tensor([[13,  1],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 7: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 8: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 9: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 0: f1 = 0.0
+INFO:root:tensor([[14,  0],
+        [ 6,  0]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 1: f1 = 0.0
+INFO:root:tensor([[14,  0],
+        [ 6,  0]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 2: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 3: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 4: f1 = 0.6666666865348816
+INFO:root:tensor([[12,  2],
+        [ 2,  4]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 5: f1 = 0.6666666865348816
+INFO:root:tensor([[14,  0],
+        [ 3,  3]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 6: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 7: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 8: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
+INFO:root:-------------------------
+INFO:root:End of epoch 9: f1 = 0.5
+INFO:root:tensor([[14,  0],
+        [ 4,  2]], device='cuda:0')
