@@ -92,7 +92,7 @@ class SetFitTrainer():
             conf_matrix= multiclass_confusion_matrix(
                 y_pred_val.to(torch.int64),
                 y_true_val.to(torch.int64),
-                num_classes=self.num_classes
+                num_classes=2
             )
             
             f1 = binary_f1_score(
