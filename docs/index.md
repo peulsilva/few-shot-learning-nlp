@@ -1,17 +1,26 @@
-# Welcome to MkDocs
+# Welcome to the Few Shot Learning NLP Library Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This library provides tools and utilities for Few Shot Learning in Natural Language Processing (NLP).
 
-## Commands
+## Overview
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Few Shot Learning in NLP involves training and evaluating models on tasks with limited labeled data. This library offers functionalities to facilitate this process.
 
-## Project layout
+## Supported Approachs
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+### Text Classification
+- Sentence Transformers Finetuning ([SetFit](setfit.md))
+- Pattern Exploiting Training ([PET](pet.md))
+
+### Named Entity Recognition for Image Documents
+- Pattern Exploiting Training ([PET](pet.md))
+- [Bio Technique](bio.md)
+
+### Classification utils 
+
+- [Focal Loss function for imbalanced datasets](loss.md)
+- [Stratified train test split](train_test_split.md)
+
+## Usage
+
+To utilize this library, import the necessary classes and methods and follow the provided documentation for each component.

@@ -4,7 +4,7 @@ from tqdm import tqdm
 from datasets import Dataset
 from transformers import AutoModelForTokenClassification
 from copy import deepcopy
-from torcheval.metrics.functional import multiclass_f1_score, multiclass_confusion_matrix
+from torcheval.metrics.functional import multiclass_f1_score, multiclass_confusion_matrix, binary_f1_score
 from IPython.display import clear_output
 from torch.utils.data import DataLoader
 
@@ -117,11 +117,19 @@ class BioTrainer:
                 y_pred_val = torch.cat([y_pred, y_pred_val])
                 y_true_val = torch.cat([y_true, y_true_val])
 
-            f1 = multiclass_f1_score(
-                y_pred_val,
-                y_true_val,
-                num_classes=self.n_classes
-            )
+            if self.n_classes == 2:
+                f1 = binary_f1_score(
+                    y_pred_val,
+                    y_true_val,
+                )
+
+            else:
+
+                f1 = multiclass_f1_score(
+                    y_pred_val,
+                    y_true_val,
+                    num_classes=self.n_classes
+                )
 
             self.history.append(f1.item())
 
