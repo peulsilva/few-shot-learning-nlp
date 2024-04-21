@@ -2,6 +2,15 @@
 
 This library provides tools and utilities for Few Shot Learning in Natural Language Processing (NLP).
 
+## Installation 
+
+You can install this library via pip:
+
+```bash
+pip install -U few-shot-learning-nlp
+```
+
+
 ## Overview
 
 Few Shot Learning in NLP involves training and evaluating models on tasks with limited labeled data. This library offers functionalities to facilitate this process.
