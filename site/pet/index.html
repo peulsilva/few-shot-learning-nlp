@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Pattern Exploiting - Few shot learning NLP</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Pattern Exploiting";
+        var mkdocs_page_input_path = "pet.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Few shot learning NLP
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setfit/">Setfit</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Pattern Exploiting</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage example</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#imports">Imports</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preprocessing">Preprocessing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#training-the-models">Training the Models</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#evaluating-the-model">Evaluating the Model</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pettrainer">PETTrainer</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#introduction_1">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#petdatasetforclassification">PETDatasetForClassification</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#introduction_2">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#initialization_1">Initialization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methods_1">Methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notes_1">Notes</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bio/">Bio Technique</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../loss/">Focal Loss</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../images/">Image documents transformer</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../train_test_split/">Train test split</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Few shot learning NLP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Pattern Exploiting</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pattern-exploiting-training-pet">Pattern Exploiting Training (PET)</h1>
+<h2 id="introduction">Introduction</h2>
+<p><a href="https://arxiv.org/abs/2001.07676">Pattern Exploiting Training (PET)</a> is a technique used for fine-tuning pretrained language models for text classification tasks. It leverages patterns in the input text to improve classification performance. This page provides an overview of how to use PET for text classification, along with a brief usage example.</p>
+<h2 id="usage-example">Usage example</h2>
+<h3 id="imports">Imports</h3>
+<pre><code class="language-python">import transformers
+from transformers import AutoTokenizer, AutoModelForMaskedLM
+from datasets import load_dataset
+import torch
+import matplotlib.pyplot as plt
+import numpy as np
+from tqdm import tqdm
+from torcheval.metrics.functional import multiclass_confusion_matrix, binary_f1_score, multiclass_f1_score
+import seaborn as sns
+import pandas as pd
+from torch.utils.data import DataLoader
+from few_shot_learning_nlp.few_shot_text_classification.pattern_exploiting import PETTrainer
+from few_shot_learning_nlp.few_shot_text_classification.pattern_exploiting_dataset import PETDatasetForClassification
+from few_shot_learning_nlp.utils import stratified_train_test_split
+</code></pre>
+<h3 id="preprocessing">Preprocessing</h3>
+<pre><code class="language-python">
+# Load AG News dataset
+ag_news_dataset = load_dataset(&quot;ag_news&quot;)
+
+# Define a pattern for PET
+def pattern1(text: str, tokenizer: AutoTokenizer):
+    return f&quot;{tokenizer.mask_token} news: {text}&quot;
+
+# Instantiate the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(&quot;distilbert-base-uncased&quot;)
+
+# Get class names and number of classes
+class_names = ag_news_dataset['train'].features['label'].names
+num_classes = len(class_names)
+
+# Define verbalizer and inverse verbalizer
+verbalizer = {idx: tokenizer.vocab[x.lower()] for idx, x in enumerate(class_names)}
+inverse_verbalizer = {tokenizer.vocab[x.lower()]: idx for idx, x in enumerate(class_names)}
+
+# Preprocess the data
+def preprocess(text: List[str], labels: List[int]):
+    processed_text = []
+    processed_labels = []
+    for idx in range(len(text)):
+        label = idx2classes[labels[idx]]
+        text_ = text[idx]
+        processed_text.append(pattern1(text_, tokenizer))
+        processed_labels.append(label)
+    return processed_text, processed_labels
+
+train_text, train_labels = preprocess(train_df['text'], train_df['label'])
+val_text, val_labels = preprocess(val_df['text'], val_df['label'])
+test_text, test_labels = preprocess(test_df['text'], test_df['label'])
+
+# Create datasets and dataloaders
+train_dataset = PETDatasetForClassification(train_text, train_labels, tokenizer)
+val_dataset = PETDatasetForClassification(val_text, val_labels, tokenizer)
+test_dataset = PETDatasetForClassification(test_text, test_labels, tokenizer)
+train_dataloader = DataLoader(train_dataset, shuffle=True)
+val_dataloader = DataLoader(val_dataset)
+test_dataloader = DataLoader(test_dataset)
+
+</code></pre>
+<h3 id="training-the-models">Training the Models</h3>
+<pre><code class="language-python"># Load pretrained model
+model = AutoModelForMaskedLM.from_pretrained(&quot;distilbert-base-uncased&quot;).to(device)
+
+# Instantiate PETTrainer
+trainer = PETTrainer(model, verbalizer, tokenizer, num_classes=len(classes))
+
+# Train the model
+history, confusion_matrix, best_model = trainer.train(
+    train_dataloader, 
+    val_dataloader, 
+    alpha=1e-6,
+    lr=1e-4,
+    device=device
+)
+</code></pre>
+<h3 id="evaluating-the-model">Evaluating the Model</h3>
+<pre><code class="language-python"># Plot F1 score over epochs
+plt.plot(history)
+plt.scatter(np.argmax(history), np.max(history), label=f&quot;f1 = {np.max(history)}&quot;, c=&quot;green&quot;)
+plt.grid()
+plt.title(&quot;F1 score over epochs&quot;)
+plt.xlabel(&quot;epoch&quot;)
+plt.ylabel(&quot;F1 score&quot;)
+plt.legend()
+
+# Plot confusion matrix
+df = pd.DataFrame(confusion_matrix.to(&quot;cpu&quot;).numpy(), index=class_names, columns=class_names)
+sns.heatmap(df, annot=True, fmt='2g')
+plt.title(f&quot;Confusion Matrix Ag news - PET&quot;)
+
+# Test the model
+y_true_test, y_pred_test = trainer.test(test_dataloader)
+f1 = multiclass_f1_score(y_pred_test, y_true_test, num_classes=len(classes))
+</code></pre>
+<p>This code demonstrates how to perform text classification using Pattern Exploiting Training (PET) with a few-shot learning approach. It includes steps for dataset loading, preprocessing, model training, evaluation, and testing.</p>
+<p>Make sure to adapt the paths, hyperparameters, and dataset configurations according to your specific setup and requirements.</p>
+<h2 id="pettrainer">PETTrainer</h2>
+<h3 id="introduction_1">Introduction</h3>
+<p>The <code>PETTrainer</code> class is designed to fine-tune a model with Pattern Exploiting Training (PET) for text classification tasks. It combines a pretrained language model with PET to enhance classification performance.</p>
+<h3 id="initialization">Initialization</h3>
+<pre><code class="language-python">def __init__(
+    self,
+    model: AutoModelForMaskedLM,
+    verbalizer: Dict,
+    tokenizer: AutoTokenizer,
+    num_classes: int,
+    device: str = 'cuda',
+) -&gt; None:
+</code></pre>
+<ul>
+<li><code>model</code>: Pretrained language model to be fine-tuned.</li>
+<li><code>verbalizer</code>: Dictionary mapping class labels to corresponding tokens.</li>
+<li><code>tokenizer</code>: Tokenizer associated with the model.</li>
+<li><code>num_classes</code>: Number of classes in the classification task.</li>
+<li><code>device</code>: Device on which calculations are performed (default: 'cuda').</li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ol>
+<li>
+<p><code>get_y_true(input, inverse_verbalizer, device)</code></p>
+<ul>
+<li>Get the true labels from the input data.</li>
+<li><code>input</code>: Input data containing the true labels.</li>
+<li><code>inverse_verbalizer</code>: Dictionary mapping tokens to class labels.</li>
+<li><code>device</code>: Device on which calculations are performed.</li>
+</ul>
+</li>
+<li>
+<p><code>train(train_dataloader, val_dataloader, alpha, loss_fn, device, lr, n_epochs)</code></p>
+<ul>
+<li>Train the PET model.</li>
+<li><code>train_dataloader</code>: DataLoader for the training dataset.</li>
+<li><code>val_dataloader</code>: DataLoader for the validation dataset.</li>
+<li><code>alpha</code>: Weighting factor for balancing MLM and CE losses.</li>
+<li><code>loss_fn</code>: Custom loss function for the CE loss (default: None).</li>
+<li><code>device</code>: Device on which calculations are performed (default: 'cuda').</li>
+<li><code>lr</code>: Learning rate for optimization (default: 1e-5).</li>
+<li><code>n_epochs</code>: Number of training epochs (default: 10).</li>
+<li>Returns a tuple containing training history, confusion matrix, and the best trained model.</li>
+</ul>
+</li>
+<li>
+<p><code>test(test_dataloader)</code></p>
+<ul>
+<li>Perform inference/testing using the trained model on the provided test data.</li>
+<li><code>test_dataloader</code>: DataLoader containing the test data.</li>
+<li>Returns a tuple containing true labels and predicted labels.</li>
+</ul>
+</li>
+</ol>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>PET (Pattern Exploiting Training) is a technique for fine-tuning pretrained language models for text classification tasks.</li>
+<li>The trainer supports multi-class classification tasks.</li>
+<li>The model is trained using a combination of Masked Language Model (MLM) loss and Cross-Entropy (CE) loss.</li>
+</ul>
+<h2 id="petdatasetforclassification">PETDatasetForClassification</h2>
+<h3 id="introduction_2">Introduction</h3>
+<p>The <code>PETDatasetForClassification</code> class is a Dataset class designed for Pattern Exploiting Training (PET) in text classification tasks. It preprocesses input texts, tokenizes them, encodes class labels, and prepares the dataset for PET training.</p>
+<h3 id="initialization_1">Initialization</h3>
+<pre><code class="language-python">def __init__(
+    self, 
+    processed_text: List[str], 
+    labels: List[int],
+    tokenizer: AutoTokenizer,
+    device: str = &quot;cuda&quot;
+) -&gt; None:
+</code></pre>
+<ul>
+<li><code>processed_text</code>: List of processed input texts.</li>
+<li><code>labels</code>: List of corresponding class labels.</li>
+<li><code>tokenizer</code>: Tokenizer used to tokenize the input texts.</li>
+<li><code>device</code>: Device on which calculations are performed (default: "cuda").</li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>tokens</code>: Tokenized input texts.</li>
+<li><code>encoded_labels</code>: Encoded labels for PET training.</li>
+<li><code>inputs</code>: Dictionary containing tokenized inputs and encoded labels.<ul>
+<li>Keys: 'input_ids', 'attention_mask', 'labels'</li>
+</ul>
+</li>
+<li><code>device</code>: Device on which calculations are performed.</li>
+</ul>
+<h3 id="methods_1">Methods</h3>
+<ol>
+<li>
+<p><code>__getitem__(index)</code></p>
+<ul>
+<li>Retrieves an item from the dataset at the specified index.</li>
+<li>Returns a dictionary containing tokenized inputs and encoded labels.</li>
+</ul>
+</li>
+<li>
+<p><code>__len__()</code></p>
+<ul>
+<li>Returns the total number of items in the dataset.</li>
+</ul>
+</li>
+</ol>
+<h3 id="notes_1">Notes</h3>
+<ul>
+<li>This dataset class is designed for use with PET (Pattern Exploiting Training) in text classification tasks.</li>
+<li>Each input text is tokenized using the provided tokenizer and padded/truncated to the maximum length.</li>
+<li>The class labels are encoded and replaced with mask tokens for PET training.</li>
+<li>The dataset is prepared for training on the specified device.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../setfit/" class="btn btn-neutral float-left" title="Setfit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../bio/" class="btn btn-neutral float-right" title="Bio Technique">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../setfit/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../bio/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
