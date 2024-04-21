@@ -1,0 +1,5 @@
+site_name: Few shot learning NLP
+nav:
+  - Home: index.md
+
+theme: readthedocs
