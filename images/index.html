@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Image documents transformer - Few shot learning NLP</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Image documents transformer";
+        var mkdocs_page_input_path = "images.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Few shot learning NLP
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setfit/">Setfit</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pet/">Pattern Exploiting</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bio/">Bio Technique</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../loss/">Focal Loss</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Image documents transformer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../train_test_split/">Train test split</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Few shot learning NLP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Image documents transformer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="imagelayoutdataset">ImageLayoutDataset</h1>
+<p>A PyTorch Dataset for handling image layout data with tokenization and labeling.</p>
+<h2 id="arguments">Arguments</h2>
+<ul>
+<li><code>data (List[Dict])</code>: A list of dictionaries containing the image layout data. Each dictionary should contain at least the following keys:<ul>
+<li><code>'words'</code>: List of words in the text.</li>
+<li><code>'bboxes'</code>: List of bounding boxes corresponding to each word.</li>
+<li><code>'ner_tags'</code>: List of named entity recognition tags.</li>
+</ul>
+</li>
+<li><code>tokenizer</code>: The tokenizer to tokenize the text.</li>
+<li><code>device (str, optional)</code>: The device where tensors will be placed. Defaults to 'cuda'.</li>
+<li><code>encode (bool, optional)</code>: Whether to encode the data during initialization. Defaults to True.</li>
+<li><code>tokenize_all_labels (bool, optional)</code>: Whether to tokenize all labels or only the first token of a word. Defaults to False.</li>
+<li><code>valid_labels_keymap (Dict, optional)</code>: A dictionary mapping valid labels to their corresponding token ids. Defaults to None.</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ol>
+<li><code>tokenize_labels(ner_tags, tokens)</code>: Tokenizes and aligns the labels with the tokens.</li>
+<li><code>tokenize_boxes(words, boxes)</code>: Tokenizes the bounding boxes and pads them to match the sequence length.</li>
+<li><code>encode(example)</code>: Encodes an example from the dataset.</li>
+<li><code>__getitem__(index)</code>: Retrieves an item from the dataset at the specified index.</li>
+<li><code>__len__()</code> : Returns the length of the dataset.</li>
+</ol>
+<h2 id="attributes">Attributes</h2>
+<ul>
+<li><code>tokenizer</code>: The tokenizer used for tokenization.</li>
+<li><code>device (str)</code>: The device where tensors will be placed.</li>
+<li><code>valid_labels_keymap (Dict)</code>: A dictionary mapping valid labels to their corresponding token ids.</li>
+<li><code>tokenize_all_labels (bool)</code>: Whether to tokenize all labels or only the first token of a word.</li>
+<li><code>X (List)</code>: List to store the encoded data or raw data.</li>
+</ul>
+<h2 id="usage-example">Usage Example</h2>
+<p>```python
+from transformers import AutoTokenizer
+from torch.utils.data import DataLoader
+from datasets import load_dataset
+from few_shot_learning_nlp.few_shot_ner_image_documents.image_dataset import ImageLayoutDataset</p>
+<h1 id="load-the-funsd-dataset">Load the FUNSD dataset</h1>
+<p>dataset = load_dataset("nielsr/funsd")</p>
+<h1 id="example-tokenizer">Example tokenizer</h1>
+<p>tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")</p>
+<h1 id="example-data-from-the-funsd-dataset">Example data from the FUNSD dataset</h1>
+<p>data = dataset["train"]</p>
+<h1 id="initialize-the-dataset">Initialize the dataset</h1>
+<p>image_layout_dataset = ImageLayoutDataset(data, tokenizer)</p>
+<h1 id="get-the-length-of-the-dataset">Get the length of the dataset</h1>
+<p>print("Dataset length:", len(image_layout_dataset))</p>
+<h1 id="get-an-item-from-the-dataset">Get an item from the dataset</h1>
+<p>example_item = image_layout_dataset[0]
+print("Example item:", example_item)</p>
+<h1 id="dataloader-example">DataLoader example</h1>
+<p>loader = DataLoader(image_layout_dataset, batch_size=4, shuffle=True)
+for batch in loader:
+    print("Batch shape:", batch.shape)</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../loss/" class="btn btn-neutral float-left" title="Focal Loss"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../train_test_split/" class="btn btn-neutral float-right" title="Train test split">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../loss/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../train_test_split/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

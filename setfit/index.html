@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Setfit - Few shot learning NLP</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Setfit";
+        var mkdocs_page_input_path = "setfit.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Few shot learning NLP
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Setfit</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-it-works">How It Works</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage example</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#preprocessing">Preprocessing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#defining-classifier">Defining Classifier</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#training-the-embedding-model">Training the Embedding Model </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#training-the-classifier-model">Training the Classifier Model </a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-the-models">Testing the Models </a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setfittrainer">SetFitTrainer</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#introduction_1">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#initialization">Initialization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setfitdataset">SetFitDataset</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#introduction_2">Introduction</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#initialization_1">Initialization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#methods_1">Methods</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pet/">Pattern Exploiting</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bio/">Bio Technique</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../loss/">Focal Loss</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../images/">Image documents transformer</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../train_test_split/">Train test split</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Few shot learning NLP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Setfit</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setfit">SetFit</h1>
+<h2 id="introduction">Introduction</h2>
+<p><a href="https://arxiv.org/abs/2209.11055">SetFit</a> is a framework for few-shot fine-tuning of Sentence Transformers, developed by Hugging Face.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>Prompt-Free Approach</strong>: Unlike other few-shot learning methods, SetFit does not require handcrafted prompts or verbalisers. It generates rich embeddings directly from a small number of labeled text examples.</li>
+<li><strong>Efficiency</strong>: SetFit achieves high accuracy without the need for large-scale models like T0 or GPT-3, making it significantly faster to train and run inference with.</li>
+<li><strong>Multilingual Support</strong>: SetFit can be used with any Sentence Transformer model available on the Hub, enabling text classification in multiple languages with ease.</li>
+</ul>
+<h3 id="how-it-works">How It Works</h3>
+<p>SetFit adopts a two-stage training process:
+1. <strong>Fine-tuning the Sentence Transformer</strong>: In the initial stage, SetFit fine-tunes a Sentence Transformer model on a small number of labeled examples using contrastive training. The model learns to generate dense embeddings for each example.
+2. <strong>Training the Classifier</strong>: In the second stage, SetFit trains a classifier head on the embeddings generated by the fine-tuned Sentence Transformer. This classifier can then predict the labels for unseen examples based on their embeddings.</p>
+<h2 id="usage-example">Usage example</h2>
+<h3 id="preprocessing">Preprocessing</h3>
+<pre><code class="language-python">from datasets import load_dataset
+import pandas as pd
+from few_shot_learning_nlp.utils import stratified_train_test_split
+from torch.utils.data import DataLoader
+from few_shot_learning_nlp.few_shot_text_classification.setfit_dataset import SetFitDataset
+
+# Load a dataset for text classification
+ag_news_dataset = load_dataset(&quot;ag_news&quot;)
+
+# Extract necessary information from the dataset
+num_classes = len(ag_news_dataset['train'].features['label'].names)
+
+# Perform few-shot learning by selecting a limited number of classes
+n_shots = 50
+train_validation, test_df = stratified_train_test_split(ag_news_dataset['train'], num_shots_per_class=n_shots)
+train_df, val_df = stratified_train_test_split(pd.DataFrame(train_validation), num_shots_per_class=30)
+
+# Create SetFitDataset objects for training and validation
+set_fit_data_train = SetFitDataset(train_df['text'], train_df['label'], input_example_format=True)
+set_fit_data_val = SetFitDataset(val_df['text'], val_df['label'], input_example_format=False)
+
+# Create DataLoader objects for training and validation datasets
+train_dataloader = DataLoader(set_fit_data_train.data, shuffle=False)
+val_dataloader = DataLoader(set_fit_data_val)
+</code></pre>
+<h3 id="defining-classifier">Defining Classifier</h3>
+<pre><code class="language-python">import torch
+
+class CLF(torch.nn.Module):
+    def __init__(
+        self,
+        in_features : int,
+        out_features : int, 
+        *args, 
+        **kwargs
+    ) -&gt; None:
+        super().__init__(*args, **kwargs)
+
+        self.layer1 = torch.nn.Linear(in_features, 128)
+        self.relu = torch.nn.ReLU()
+        self.layer2 = torch.nn.Linear(128, 32)
+        self.layer3 = torch.nn.Linear(32, out_features)
+
+    def forward(self, x : torch.Tensor):
+        x = self.layer1(x)
+        x = self.relu(x)
+        x = self.layer2(x)
+        x = self.relu(x)
+        return self.layer3(x)
+</code></pre>
+<h3 id="training-the-embedding-model">Training the Embedding Model <a name="training-the-embedding-model"></a></h3>
+<pre><code class="language-python">import torch
+from sentence_transformers import SentenceTransformer
+from few_shot_learning_nlp.few_shot_text_classification.setfit import SetFitTrainer
+
+# Load a pre-trained Sentence Transformer model
+model = SentenceTransformer(&quot;whaleloops/phrase-bert&quot;)
+
+# Initialize the SetFitTrainer with embedding model and classifier
+embedding_model = model.to(&quot;cuda&quot;)
+in_features = embedding_model.get_sentence_embedding_dimension()
+clf = CLF(in_features, num_classes).to(&quot;cuda&quot;)
+trainer = SetFitTrainer(embedding_model, clf, num_classes)
+
+# Train the embedding model
+trainer.train_embedding(train_dataloader, val_dataloader, n_epochs=10)
+</code></pre>
+<h3 id="training-the-classifier-model">Training the Classifier Model <a name="training-the-classifier-model"></a></h3>
+<pre><code class="language-python">
+# Shuffle training data
+_, class_counts = np.unique(train_df['label'], return_counts=True)
+X_train_shuffled, y_train_shuffled = shuffle_two_lists(train_df['text'], train_df['label'])
+
+# Train the classifier
+history, embedding_model, clf = trainer.train_classifier(
+    X_train_shuffled, y_train_shuffled, val_df['text'], val_df['label'],
+    clf=CLF(in_features, num_classes),
+    n_epochs=15,
+    lr=1e-4
+)
+</code></pre>
+<h3 id="testing-the-models">Testing the Models <a name="testing-the-models"></a></h3>
+<pre><code class="language-python">y_true, y_pred = trainer.test(test_df)
+</code></pre>
+<h2 id="setfittrainer">SetFitTrainer</h2>
+<h3 id="introduction_1">Introduction</h3>
+<p>The <code>SetFitTrainer</code> class is designed to facilitate the training and testing of embedding and classification models using Sentence Transformers and PyTorch. It provides methods for training embedding models, training classifier models, and testing the performance of trained models on test datasets.</p>
+<h3 id="initialization">Initialization</h3>
+<pre><code class="language-python">def __init__(
+    self,
+    embedding_model,
+    classifier_model: torch.nn.Module,
+    num_classes: int,
+    dataset_name: str = None,
+    model_name: str = None,
+    device: str ='cuda',
+) -&gt; None:
+</code></pre>
+<ul>
+<li><code>embedding_model</code>: Pre-trained embedding model.</li>
+<li><code>classifier_model</code>: Classifier model for text classification.</li>
+<li><code>num_classes</code>: Number of classes in the classification task.</li>
+<li><code>dataset_name</code>: Name of the dataset (optional).</li>
+<li><code>model_name</code>: Name of the model (optional).</li>
+<li><code>device</code>: Device on which calculations are performed (default: "cuda").</li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ol>
+<li>
+<p><code>train_embedding(train_dataloader, val_dataloader, n_epochs=10, filepath=None, **kwargs)</code></p>
+<ul>
+<li>Train the embedding model using the provided training dataloader and validate it using the validation dataloader.</li>
+<li>Args:<ul>
+<li><code>train_dataloader</code>: DataLoader containing the training data.</li>
+<li><code>val_dataloader</code>: DataLoader containing the validation data.</li>
+<li><code>n_epochs</code>: Number of epochs for training (default: 10).</li>
+<li><code>filepath</code>: Filepath to save the best model (default: None).</li>
+<li><code>**kwargs</code>: Additional keyword arguments to pass to the embedding model's fit method.</li>
+</ul>
+</li>
+<li>Returns: None</li>
+</ul>
+</li>
+<li>
+<p><code>train_classifier(X_train, y_train, X_val, y_val, n_epochs=100, loss_fn=torch.nn.CrossEntropyLoss(), embedding_model=None, clf=None, lr=1e-5)</code></p>
+<ul>
+<li>Train the classifier model using the provided training and validation data.</li>
+<li>Args:<ul>
+<li><code>X_train</code>: List of training texts.</li>
+<li><code>y_train</code>: List of corresponding training labels.</li>
+<li><code>X_val</code>: List of validation texts.</li>
+<li><code>y_val</code>: List of corresponding validation labels.</li>
+<li><code>n_epochs</code>: Number of epochs for training (default: 100).</li>
+<li><code>loss_fn</code>: Loss function for training (default: torch.nn.CrossEntropyLoss()).</li>
+<li><code>embedding_model</code>: Pre-trained embedding model to use. If None, uses the best_model (default: None).</li>
+<li><code>clf</code>: Classifier model to use. If None, uses self.clf (default: None).</li>
+<li><code>lr</code>: Learning rate for optimizer (default: 1e-5).</li>
+</ul>
+</li>
+<li>Returns: Tuple containing the history of F1 scores during training, the embedding model, and the best classifier model.</li>
+</ul>
+</li>
+<li>
+<p><code>test(test_df, embedding_model=None, clf=None)</code></p>
+<ul>
+<li>Test the performance of the trained models on the provided test dataset.</li>
+<li>Args:<ul>
+<li><code>test_df</code>: DataFrame containing the test dataset with 'text' and 'label' columns.</li>
+<li><code>embedding_model</code>: SentenceTransformer model for text embedding. If None, the best trained embedding model will be used (default: None).</li>
+<li><code>clf</code>: Trained classifier model. If None, the best trained classifier will be used (default: None).</li>
+</ul>
+</li>
+<li>Returns: Tuple containing the true labels and predicted labels for the test dataset.</li>
+</ul>
+</li>
+</ol>
+<h2 id="setfitdataset">SetFitDataset</h2>
+<h3 id="introduction_2">Introduction</h3>
+<p>The <code>SetFitDataset</code> class is designed to create pairs of texts with their corresponding labels for training. It expands the dataset by considering all possible pairs of texts or randomly selecting pairs within a specified radius.</p>
+<h3 id="initialization_1">Initialization</h3>
+<pre><code class="language-python">def __init__(
+    self, 
+    text: List[str],
+    labels: List[int],
+    R: int = -1,
+    input_example_format: bool = True
+) -&gt; None:
+</code></pre>
+<ul>
+<li><code>text</code>: List of texts.</li>
+<li><code>labels</code>: List of corresponding labels.</li>
+<li><code>R</code>: Radius for data expansion. If negative, considers all possible pairs within the dataset. If positive, randomly selects pairs within the specified radius (default: -1).</li>
+<li><code>input_example_format</code>: If True, returns expanded data in the InputExample format. If False, returns expanded data as a list of lists (default: True).</li>
+</ul>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>data</code>: Expanded dataset containing pairs of texts with their labels.</li>
+</ul>
+<h3 id="methods_1">Methods</h3>
+<ol>
+<li>
+<p><code>expand_data(X, y, R, input_example_format)</code></p>
+<ul>
+<li>Static method to expand the dataset by creating pairs of texts with their corresponding labels.</li>
+<li>Args:<ul>
+<li><code>X</code>: List of texts.</li>
+<li><code>y</code>: List of corresponding labels.</li>
+<li><code>R</code>: Radius for data expansion. If negative, considers all possible pairs within the dataset. If positive, randomly selects pairs within the specified radius (default: -1).</li>
+<li><code>input_example_format</code>: If True, returns expanded data in the InputExample format. If False, returns expanded data as a list of lists (default: True).</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>Expanded dataset containing pairs of texts with their labels.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>__len__()</code></p>
+<ul>
+<li>Returns the length of the dataset.</li>
+</ul>
+</li>
+<li>
+<p><code>__getitem__(index)</code></p>
+<ul>
+<li>Returns the item at the specified index in the dataset.
+```</li>
+</ul>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pet/" class="btn btn-neutral float-right" title="Pattern Exploiting">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../pet/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
