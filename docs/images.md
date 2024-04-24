@@ -62,3 +62,5 @@ print("Example item:", example_item)
 loader = DataLoader(image_layout_dataset, batch_size=4, shuffle=True)
 for batch in loader:
     print("Batch shape:", batch.shape)
+
+```
