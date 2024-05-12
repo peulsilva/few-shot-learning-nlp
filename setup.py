@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="few-shot-learning-nlp",
-    version="1.0.1",
+    version="1.0.4",
     author="Pedro Silva",
     author_email="pedrolmssilva@gmail.com",
     description="This library provides tools and utilities for Few Shot Learning in Natural Language Processing (NLP).",

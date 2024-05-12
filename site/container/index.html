@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ContaiNER - Few shot learning NLP</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://unpkg.com/katex@0/dist/katex.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ContaiNER";
+        var mkdocs_page_input_path = "container.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Few shot learning NLP
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setfit/">Setfit</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pet/">Pattern Exploiting</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../bio/">Classbite</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">ContaiNER</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../loss/">Focal Loss</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../images/">Image documents transformer</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../train_test_split/">Train test split</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Few shot learning NLP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">ContaiNER</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="embedding-model-training-approach">Embedding Model Training Approach</h1>
+<p>In this approach, the goal is to train the embedding model so that tokens of similar classes are brought closer together while tokens of different classes are pushed apart.</p>
+<p>To achieve this, we will leverage a pre-trained language model (PLM) as well as two auxiliary neural networks called projection networks denoted by <span class="arithmatex">\(f_\mu\)</span> and <span class="arithmatex">\(f_\Sigma\)</span>. These neural networks will generate the means and covariances of token distributions. The fundamental idea here is that tokens follow a normal distribution.</p>
+<p>Given a text of size <span class="arithmatex">\(n\)</span>: <span class="arithmatex">\([x_1, \dots, x_n]\)</span> representing the tokens, we will extract the embedding representations of each of these tokens <span class="arithmatex">\([\textbf{h}_1, \dots, \textbf{h}_n]\)</span> (<span class="arithmatex">\(h_j \in \mathbb{R}^d\)</span> where <span class="arithmatex">\(d\)</span> depends on the choice of PLM).</p>
+<div class="arithmatex">\[
+[\textbf{h}_1, \dots, \textbf{h}_n] = PLM([x_1, \dots, x_n])
+\]</div>
+<p>We will then use the projection networks to construct the parameters of a Gaussian distribution:</p>
+<div class="arithmatex">\[
+{\mu}_i = f_\mu({h}_i), \ (\Sigma_i)_k = ELU(f_\Sigma(h_i)_k) + (1 + \epsilon)
+\]</div>
+<p>We assume that <span class="arithmatex">\(h_i\)</span> follows a normal distribution <span class="arithmatex">\(\mathcal{N}(\mu_i, \Sigma_i)\)</span>. In this distribution, <span class="arithmatex">\(\Sigma_i\)</span> is a diagonal matrix whose entries are determined by the equation above. The ELU (Exponential Linear Unit) is an activation function that provides a differentiable variation of the ReLU (Rectified Linear Unit) activation function:</p>
+<div class="arithmatex">\[
+ELU(x) = 
+\begin{cases}
+    x &amp; \text{if } x \geq 0, \\
+    \alpha (e^x - 1) &amp; \text{if } x &lt; 0
+\end{cases}
+\]</div>
+<p>Here, <span class="arithmatex">\(\alpha\)</span> is a hyperparameter and typically, we use <span class="arithmatex">\(\alpha = 1\)</span>. We add <span class="arithmatex">\((1 + \epsilon)\)</span> to <span class="arithmatex">\(\Sigma_i\)</span> to ensure that it is positive definite, which is a necessary condition for a covariance matrix.</p>
+<p>We define the distance between two normal distributions <span class="arithmatex">\(\mathcal{N}_p\)</span> and <span class="arithmatex">\(\mathcal{N}_q\)</span> as the Kullback-Leibler divergence (KL), which measures the dissimilarity between two probability distributions in terms of information gain:</p>
+<div class="arithmatex">\[
+\begin{split}
+    d(p,q) &amp;= \frac{1}{2}\left[ D_{KL}(\mathcal{N}_p || \mathcal{N}_q) + D_{KL}(\mathcal{N}_q || \mathcal{N}_p) \right]
+\end{split}
+\]</div>
+<p>Ultimately, given a training point <span class="arithmatex">\(p\)</span>, we define <span class="arithmatex">\(X_p \subset X\)</span> as the set of points <span class="arithmatex">\((x,y)\)</span> belonging to the same class as <span class="arithmatex">\(p\)</span>. Thus, our objective is to minimize the softmax sum of distances between <span class="arithmatex">\(X_p\)</span> and all other points in <span class="arithmatex">\(X\)</span>:</p>
+<div class="arithmatex">\[
+\begin{split}
+    l(p) &amp; = -\log{\left[
+        \frac{\sum_{(X_q, y_q) \in X_p}\exp{(-d(p,q))} /|X_p|}{\sum_{X_q, y_q \in X, p \neq q} \exp{(-d(p,q))}}
+        \right]
+    } \\
+    \mathcal{L}(X)  &amp;= \frac{1}{|X|} \sum_{p \in X} l(p)
+\end{split}
+\]</div>
+<p>This approach aims to reduce the distance between two tokens belonging to the same class, making this distance tend towards <span class="arithmatex">\(0\)</span>.</p>
+<p>Figure \ref{fig:container} shows a training schema of ContaiNER. The author also proposes a two-stage training, given a Source training set (with plenty of available observations) and our few-shot learning set called Support. First, we will perform training of the PLM, <span class="arithmatex">\(f_\mu\)</span>, and <span class="arithmatex">\(f_\Sigma\)</span> on the Source set (which can take a long time), then we will fine-tune on the Support set.</p>
+<p>After these two trainings, inference is performed using a nearest neighbor method seen during training (k-NN): given a test sentence <span class="arithmatex">\([x_1, \dots, x_m]\)</span>, label predictions are given by <span class="arithmatex">\([\hat{y}_1, \dots, \hat{y}_m]\)</span>.</p>
+<div class="arithmatex">\[
+\begin{cases}
+    [h_1, \dots h_m] = PLM(x_1, \dots, x_m) \\
+    \hat{y}_i = kNN(h_i)
+\end{cases}
+\]</div>
+<p>An advantage of ContaiNER over other few-shot learning approaches is that, since there is no text transformation before passing through the language model, ContaiNER becomes the only approach where LayoutLM (the state-of-the-art for document image classification task) is applicable, thus allowing the use of 2D positional embeddings.</p>
+<p>However, the ContaiNER approach, which involves simultaneously optimizing three neural networks, requires considerable computational power. The training step requires approximately 20 GB of graphics memory, and the entire process can take over an hour, even with very little data. Additionally, implementing this method is not simple, and managing the numerous hyperparameters poses a major challenge.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bio/" class="btn btn-neutral float-left" title="Classbite"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../loss/" class="btn btn-neutral float-right" title="Focal Loss">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bio/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../loss/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/katex.js"></script>
+      <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      <script src="../javascripts/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

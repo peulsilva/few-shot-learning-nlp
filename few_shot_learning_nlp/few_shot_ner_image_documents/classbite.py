@@ -8,9 +8,9 @@ from torcheval.metrics.functional import multiclass_f1_score, multiclass_confusi
 from IPython.display import clear_output
 from torch.utils.data import DataLoader
 
-class BioTrainer:
+class ClassbiteTrainer:
     """
-    A class to facilitate training and evaluation of a biomedical token classification model.
+    A class to facilitate training and evaluation of a token classification model.
 
     Args:
         model (AutoModelForTokenClassification): The token classification model to be trained.
@@ -35,7 +35,7 @@ class BioTrainer:
         device : str = "cuda",
     ) -> None:
         """
-        Initialize BioTrainer with the provided token classification model, optimizer, and other parameters.
+        Initialize ClassBite with the provided token classification model, optimizer, and other parameters.
 
         Args:
             model (AutoModelForTokenClassification): The token classification model to be trained.
@@ -168,7 +168,7 @@ class BioTrainer:
         """
         y_pred_test = torch.tensor([],device=self.device)
         y_true_test = torch.tensor([],device=self.device)
-        with torch.no_grad:
+        with torch.no_grad():
             for batch in tqdm(test_dataloader):
                 for k,v in batch.items():
                     batch[k] = v.to(self.device)

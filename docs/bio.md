@@ -1,11 +1,11 @@
 
-# Bio Technique for Named Entity Recognition on Image Documents
+# CLASSBITE for Named Entity Recognition on Image Documents
 
 ## Introduction
 
-The [BioTechnique](https://arxiv.org/abs/2305.04928) approach adapts multi-class classification into a binary framework by predicting the class membership of each token in a text. It achieves this by appending each token with its possible class label, thereby increasing the data volume by a factor of k, where k represents the number of classes. This augmentation enables binary classification for each token, facilitating more granular classification within the document.
+The [CLASSBITE](https://arxiv.org/abs/2305.04928) approach adapts multi-class classification into a binary framework by predicting the class membership of each token in a text. It achieves this by appending each token with its possible class label, thereby increasing the data volume by a factor of k, where k represents the number of classes. This augmentation enables binary classification for each token, facilitating more granular classification within the document.
 
-In the BioTechnique approach, suppose we have the classes C = [City, Transport, None]. For a given sentence "Paris has a good metro system", we transform it into three separate sentences:
+In the CLASSBITE approach, suppose we have the classes C = [City, Transport, None]. For a given sentence "Paris has a good metro system", we transform it into three separate sentences:
 
 1. City [SEP] Paris has a good metro system
 
@@ -32,9 +32,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torcheval.metrics.functional import multiclass_f1_score, multiclass_confusion_matrix, binary_f1_score
 
-from few_shot_learning_nlp.few_shot_ner_image_documents.bio_technique import BioTrainer
+from few_shot_learning_nlp.few_shot_ner_image_documents.classbite import ClassbiteTrainer
 from few_shot_learning_nlp.few_shot_ner_image_documents.image_dataset import ImageLayoutDataset
-from few_shot_learning_nlp.few_shot_ner_image_documents.bio_technique_dataset import generate_dataset
+from few_shot_learning_nlp.few_shot_ner_image_documents.classbite_dataset import generate_dataset
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 ```
@@ -71,7 +71,7 @@ model.to(device)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
 
-trainer = BioTrainer(model, optimizer, n_classes)
+trainer = ClassbiteTrainer(model, optimizer, n_classes)
 
 history = trainer.train(train_dataloader, validation_dataloader, n_epochs=100)
 
@@ -101,16 +101,16 @@ f1 = multiclass_f1_score(y_pred.to(torch.int64), y_true.to(torch.int64), num_cla
 This notebook showcases the implementation of Few-Shot Learning for NER on image documents using transformers and PyTorch.
 
 ---
-title: BioTrainer Class Documentation
+title: Classbite Class Documentation
 ---
 
-## BioTrainer
+## ClassbiteTrainer
 
 ### Methods
 
 1. `__init__(model, optimizer, n_classes, device="cuda")`
 
-    Initialize BioTrainer with the provided token classification model, optimizer, and other parameters.
+    Initialize Classbite with the provided token classification model, optimizer, and other parameters.
 
     - `model (AutoModelForTokenClassification)`: The token classification model to be trained.
     - `optimizer (torch.optim)`: The optimizer used for training.

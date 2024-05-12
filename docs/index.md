@@ -23,7 +23,8 @@ Few Shot Learning in NLP involves training and evaluating models on tasks with l
 
 ### Named Entity Recognition for Image Documents
 - Pattern Exploiting Training ([PET](pet.md))
-- [Bio Technique](bio.md)
+- [CLASSBITE](bio.md)
+- [ContaiNER](container.md)
 
 ### Classification utils 
 
